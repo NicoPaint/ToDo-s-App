@@ -1,0 +1,9 @@
+.app{
+    position: relative;
+    height: 100%;
+    padding: 0.5rem 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px);
+    border: 0.1rem solid rgba(255, 255, 255, 0.5);
+    border-radius: 1rem;
+}

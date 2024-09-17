@@ -1,0 +1,9 @@
+.todo-counter{
+    margin: 3rem 1rem;
+    text-align: center;
+    color: var(--dark-blue);
+}
+
+.todo-counter span{
+    font-weight: 900;
+}
