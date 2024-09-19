@@ -1,3 +1,4 @@
+//Este componente es el contenedor de cada uno de los ToDos de la app
 import "./TodoList.css"
 
 function TodoList(props){
