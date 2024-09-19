@@ -30,6 +30,15 @@ function App() {
   const completedToDos = toDos.filter(todo => todo.completed).length;  //se crea este estado derivado para llevar la cuenta de los ToDOs completados
   const totalToDos = toDos.length;  //este estado derivado lleva la cuenta del total de ToDos creados.
 
+  //este estado derivado del toDos va a hacer el filtrado de los ToDos según la búsqueda de los usuarios.
+  const searchedToDos = toDos.filter(todo => {
+		//toLowerCase se aplica para que el buscador no discrimine entre mayusculas y minusculas
+    const toDoText = todo.text.toLowerCase();   
+    const searchText = searchValue.toLowerCase();
+
+    return toDoText.includes(searchText); //va a regresar cada uno de los elementos del array que contenga el string que el usuario escriba en la barra. Si es un string vacío va a devolver todo el array original.
+  })
+
   return (
     <div className='app'>
 
@@ -41,7 +50,7 @@ function App() {
       />
 
       <TodoList>
-        {toDos.map(todo => (
+        {searchedToDos.map(todo => (  /* se reemplaza toDos por searchedToDos porque es derivado del primero y contiene el listado filtrado */
           <TodoItem 
             key={todo.text}
             text={todo.text}
