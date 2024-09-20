@@ -25,7 +25,6 @@ function App() {
 
   const [toDos, setToDos] = React.useState(defaultToDos);  //Se crea el estado para la lista de ToDos de la app que toma como valor inicial el array defaultToDos
   const [searchValue, setSearchValue] = React.useState('');  //Se crea el estado searchValue para capturar lo que escriben los usuarios y ejecutar tareas con ello
-  console.log(searchValue);
 
   const completedToDos = toDos.filter(todo => todo.completed).length;  //se crea este estado derivado para llevar la cuenta de los ToDOs completados
   const totalToDos = toDos.length;  //este estado derivado lleva la cuenta del total de ToDos creados.
@@ -38,6 +37,31 @@ function App() {
 
     return toDoText.includes(searchText); //va a regresar cada uno de los elementos del array que contenga el string que el usuario escriba en la barra. Si es un string vacío va a devolver todo el array original.
   })
+
+  //Este estado derivado se usa para hacer la actualización de la lista cada vez que un usuario de click en el icono de completado, ya sea para marcarlo como completado o no. Para ello se le pasa el texto del item para identificarlo
+  const toggleToDo = (text) => {
+    const newToDos = [...toDos];  //se crea una copia de el estado toDos.
+    const toDoIndex = newToDos.findIndex(todo => todo.text === text)  //Se trae el indice del ToDo a actualizar.
+
+    //Se hace la validación al item de su propiedad completed para cambiarla al otro estado.
+    if(newToDos[toDoIndex].completed === false){
+      newToDos[toDoIndex].completed = true;
+    } else{
+      newToDos[toDoIndex].completed = false;
+    }
+
+    setToDos(newToDos);  //Se actualiza el estado de toDos para hacer el render del nuevo listado actualizado
+  }
+  
+  //Este estado derivado se usa para eliminar un item de la lista cada vez que el usuario da click en el icon de eliminar. Para ello se le pasa el texto del item para identificarlo
+  const deleteToDo = (text) => {
+    const newToDos = [...toDos];  //se crea una copia de el estado toDos.
+    const toDoIndex = newToDos.findIndex(todo => todo.text === text)  //Se trae el indice del ToDo a eliminar.
+
+    newToDos.splice(toDoIndex, 1);  //se usa el metodo splice para eliminar el item seleccionado. Se pasa el indice y un solo elemento para eliminar solo ese unico item.
+
+    setToDos(newToDos);  //Se actualiza el estado de toDos para hacer el render del nuevo listado actualizado
+  }
 
   return (
     <div className='app'>
@@ -55,6 +79,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => toggleToDo(todo.text)}  /* Se pasa la funcion toggleToDo a los props del TodoItem. se encapsula en un arrow function porque toggleToDo recibe un parametro */
+            onDelete={() => deleteToDo(todo.text)} /* Se pasa la funcion deleteToDo a los props del TodoItem. se encapsula en un arrow function porque deleteToDo recibe un parametro */
           />
         ))}
       </TodoList>
