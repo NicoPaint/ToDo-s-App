@@ -1,10 +1,15 @@
 //Este es el componente que va a contener toda la aplicación de ToDos
+//React
 import React from 'react';
+//Components
 import { TodoCounter } from './TodoCounter/TodoCounter';
 import { TodoSearch } from './TodoSearch/TodoSearch';
 import { TodoList } from './TodoList/TodoList';
 import { TodoItem } from './TodoItem/TodoItem';
 import { CreateTodoButton } from './CreateTodoButton/CreateTodoButton';
+//Confetti
+import Confetti from 'react-confetti';
+//Styles
 import './App.css';
 
 const defaultToDos = [
@@ -63,10 +68,24 @@ function App() {
     setToDos(newToDos);  //Se actualiza el estado de toDos para hacer el render del nuevo listado actualizado
   }
 
+  //Esta funcion contiene la logica para lanzar el confetti cuando se completa todos los items de la lista
+  const shootingConfetti = () => {
+    alert('Felicitaciones! Has completado los ToDos que tenias para hoy 🥳')  //se lanza un mensaje en el navegador
+
+    //Se inserta el componente Confetti (importado de react-confetti) con esos estilos para ajustarlo a toda la pantalla.
+    return (<Confetti style={{
+      top: "-40px",
+      left: "calc((100vw - 100%)/2*(-1))"
+    }}/>)
+  }
+
   return (
     <div className='app'>
-
-      <TodoCounter total={totalToDos} completed={completedToDos}/>  {/* se pasa como props la cantidad de ToDOs terminados y la cantidad total para mostrarlos en el titulo de la app */}
+      {completedToDos === totalToDos && shootingConfetti()}  {/* Cuando los completede sean igual a los totales va a disparar el confetti en la app */}
+      <TodoCounter 
+        total={totalToDos}   /* se pasa como props la cantidad de ToDOs terminados y la cantidad total para mostrarlos en el titulo de la app */
+        completed={completedToDos}
+      />
       <TodoSearch
         /* Se pasa el estado searchValue y su modificador a la barra de busqueda para capturar lo que escriben los usuarios */
         searchValue={searchValue}
