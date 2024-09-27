@@ -1,4 +1,7 @@
 //este componente es el botón para crear nuevos ToDos item en la lista general
+//Components
+import { AddIcon } from '../Icons/AddIcon';
+//styles
 import './CreateTodoButton.css'
 
 function CreateTodoButton(){
@@ -11,7 +14,11 @@ function CreateTodoButton(){
                 console.log(event);
                 console.log(event.target);
             }}
-        >+</button>
+        >
+
+            <AddIcon/>
+        
+        </button>
     );
 }
 
