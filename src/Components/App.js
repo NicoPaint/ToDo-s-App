@@ -28,25 +28,37 @@ import './App.css';
 localStorage.setItem("TODOS_V1", JSON.stringify(defaultToDos));
 localStorage.removeItem("TODOS_V1"); */
 
-function App() {
+function useLocalStorage(itemName, initialValue) {
+  const localStorageItems = localStorage.getItem(itemName);  //Se trate la informción que este en LS bajo itemName en formato string
 
-  let stringifiedToDos = localStorage.getItem("TODOS_V1");  //Se trate la informción que este en LS bajo TODOS_V1 en formato string
+  let parsedItems;  //esta variable guarda la información en LS bajo itemName transformada en array u objeto nuevamente
 
-  let parsedToDos;  //esta variable guarda la información en LS bajo TODOS_V1 transformada en array nuevamente
-
-  //Se hace la validación para saber si existe algo en TODOS_V1 en LS o no
-  if(!stringifiedToDos){
-    //si no hay, se crea el espacio de TODOS_V1 en LS con un array vacio y parsedToDos se le asigna un array vacio
-    localStorage.setItem("TODOS_V1", JSON.stringify([]));
-    parsedToDos = [];
+  //Se hace la validación para saber si existe algo en itemName en LS o no
+  if(!localStorageItems){
+    //si no hay, se crea el espacio de itemName en LS con el initial value y parsedItems se le asigna initial value
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItems = initialValue;
   } else{
-    //si si hay, se parsea el string traido de LS y se le asigna a parsedToDos.
-    parsedToDos = JSON.parse(stringifiedToDos);
+    //si si hay, se parsea el string traido de LS y se le asigna a parsedItems.
+    parsedItems = JSON.parse(localStorageItems);
   }
 
+  const [items, setItems] = React.useState(parsedItems);  //Se crea el estado items para manejar la información de LS en la app de React, y se le asigna como valor inicial lo que haya en LS.
+
+  //Esta funcion va hacer la actualización de los items tanto en el LS (persistencia de datos) como en el estado items.
+  const saveItemsLS = (newItems) => {
+    localStorage.setItem(itemName, JSON.stringify(newItems));
+
+    setItems(newItems);
+  }
+
+  return [items, saveItemsLS];  //Se retorna items y la función para actualizar tanto el estado como el LS.
+}
+
+function App() {
   //Solo se pueden pasar estados de padres a hijos, por lo que se van a crear la mayoria de ellos en este componente padre.
 
-  const [toDos, setToDos] = React.useState(parsedToDos);  //Se crea el estado para la lista de ToDos de la app que toma como valor inicial el array que este guardado bajo TODOS_V1 en local storage
+  const [toDos, saveToDosLS] = useLocalStorage("TODOS_V1", []);  //Se consume este custome hooks para crea la lista de ToDos de la app que toma como valor inicial el array que este guardado bajo TODOS_V1 en local storage
   const [searchValue, setSearchValue] = React.useState('');  //Se crea el estado searchValue para capturar lo que escriben los usuarios y ejecutar tareas con ello
 
   const completedToDos = toDos.filter(todo => todo.completed).length;  //se crea este estado derivado para llevar la cuenta de los ToDOs completados
@@ -60,13 +72,6 @@ function App() {
 
     return toDoText.includes(searchText); //va a regresar cada uno de los elementos del array que contenga el string que el usuario escriba en la barra. Si es un string vacío va a devolver todo el array original.
   })
-
-  //Esta funcion va hacer la actualización de la lista de ToDos tanto en el LS (persistencia de datos) como en el estado toDos.
-  const saveToDosLS = (newTodos) => {
-    localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
-
-    setToDos(newTodos);
-  }
 
   //Este estado derivado se usa para hacer la actualización de la lista cada vez que un usuario de click en el icono de completado, ya sea para marcarlo como completado o no. Para ello se le pasa el texto del item para identificarlo
   const toggleToDo = (text) => {
