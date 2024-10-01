@@ -1,16 +1,13 @@
-//Este es el componente que va a contener toda la aplicación de ToDos
+//Este es el componente que va a contener toda la aplicación de ToDos y tiene la lógica a ejecutar. La parte visual se manehja en AppUI,js
 //React
 import React from 'react';
 //Components
-import { TodoCounter } from './TodoCounter/TodoCounter';
-import { TodoSearch } from './TodoSearch/TodoSearch';
-import { TodoList } from './TodoList/TodoList';
-import { TodoItem } from './TodoItem/TodoItem';
-import { CreateTodoButton } from './CreateTodoButton/CreateTodoButton';
+import { AppUI } from './AppUI';
+//Hooks
+import { useLocalStorage } from '../../Hooks/useLocalStorage';
 //Confetti
 import Confetti from 'react-confetti';
-//Styles
-import './App.css';
+
 
 /* const defaultToDos = [
   { text: "Ver bettlejuice 2", completed: true},
@@ -27,33 +24,6 @@ import './App.css';
 
 localStorage.setItem("TODOS_V1", JSON.stringify(defaultToDos));
 localStorage.removeItem("TODOS_V1"); */
-
-function useLocalStorage(itemName, initialValue) {
-  const localStorageItems = localStorage.getItem(itemName);  //Se trate la informción que este en LS bajo itemName en formato string
-
-  let parsedItems;  //esta variable guarda la información en LS bajo itemName transformada en array u objeto nuevamente
-
-  //Se hace la validación para saber si existe algo en itemName en LS o no
-  if(!localStorageItems){
-    //si no hay, se crea el espacio de itemName en LS con el initial value y parsedItems se le asigna initial value
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItems = initialValue;
-  } else{
-    //si si hay, se parsea el string traido de LS y se le asigna a parsedItems.
-    parsedItems = JSON.parse(localStorageItems);
-  }
-
-  const [items, setItems] = React.useState(parsedItems);  //Se crea el estado items para manejar la información de LS en la app de React, y se le asigna como valor inicial lo que haya en LS.
-
-  //Esta funcion va hacer la actualización de los items tanto en el LS (persistencia de datos) como en el estado items.
-  const saveItemsLS = (newItems) => {
-    localStorage.setItem(itemName, JSON.stringify(newItems));
-
-    setItems(newItems);
-  }
-
-  return [items, saveItemsLS];  //Se retorna items y la función para actualizar tanto el estado como el LS.
-}
 
 function App() {
   //Solo se pueden pasar estados de padres a hijos, por lo que se van a crear la mayoria de ellos en este componente padre.
@@ -110,33 +80,17 @@ function App() {
   }
 
   return (
-    <div className='app'>
-      {completedToDos === totalToDos && totalToDos !== 0 && shootingConfetti()}  {/* Cuando los completede sean igual a los totales, y existan ToDos, va a disparar el confetti en la app */}
-      <TodoCounter 
-        total={totalToDos}   /* se pasa como props la cantidad de ToDOs terminados y la cantidad total para mostrarlos en el titulo de la app */
-        completed={completedToDos}
-      />
-      <TodoSearch
-        /* Se pasa el estado searchValue y su modificador a la barra de busqueda para capturar lo que escriben los usuarios */
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-
-      <TodoList>
-        {searchedToDos.map(todo => (  /* se reemplaza toDos por searchedToDos porque es derivado del primero y contiene el listado filtrado */
-          <TodoItem 
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => toggleToDo(todo.text)}  /* Se pasa la funcion toggleToDo a los props del TodoItem. se encapsula en un arrow function porque toggleToDo recibe un parametro */
-            onDelete={() => deleteToDo(todo.text)} /* Se pasa la funcion deleteToDo a los props del TodoItem. se encapsula en un arrow function porque deleteToDo recibe un parametro */
-          />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton/>
-      
-    </div>
+    /* Se le pasan todos la información obtenida por el código de App al componente AppUI para que renderice la aplicación */
+    <AppUI
+      completedToDos={completedToDos}
+      totalToDos={totalToDos}
+      shootingConfetti={shootingConfetti}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      searchedToDos={searchedToDos}
+      toggleToDo={toggleToDo}
+      deleteToDo={deleteToDo}
+    />
   );
 }
 
