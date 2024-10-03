@@ -2,11 +2,11 @@
 //React
 import React from 'react';
 //Components
-import { TodoCounter } from '../TodoCounter/TodoCounter';
-import { TodoSearch } from '../TodoSearch/TodoSearch';
-import { TodoList } from '../TodoList/TodoList';
-import { TodoItem } from '../TodoItem/TodoItem';
 import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton';
+import { TodoCounter } from '../TodoCounter/TodoCounter';
+import { TodoItem } from '../TodoItem/TodoItem';
+import { TodoList } from '../TodoList/TodoList';
+import { TodoSearch } from '../TodoSearch/TodoSearch';
 //Styles
 import './App.css';
 
@@ -18,7 +18,9 @@ function AppUI({
     setSearchValue,
     searchedToDos,
     toggleToDo,
-    deleteToDo
+    deleteToDo,
+    loading,
+    error
 }){
     return(
         <div className='app'>
@@ -34,7 +36,10 @@ function AppUI({
             />
 
             <TodoList>
-                {searchedToDos.map(todo => (  /* se reemplaza toDos por searchedToDos porque es derivado del primero y contiene el listado filtrado */
+                {loading && <p>Estamos Cargando...</p>}  {/* La app muestra ese mensaje si todavia no ha obtenido al info de LS */}
+                {error && <p>Hubo un error!!!</p>}  {/* La app muestra ese mensaje si hubo un error trayendo la info de LS */}
+                {!loading && totalToDos === 0 && <p>¡Crea tu primer ToDo Item!</p>}  {/* La app muestra este mensaje si terminó la carga de LS y no hay nada guardado en LS */}
+                {searchedToDos.map(todo => (  /* se reemplaza toDos por searchedToDos porque es derivado del primero y contiene el listado filtrado */ /* No hay que hacer ninguna validación para esta seccion despues de la carga porque si no hay nada en LS, searchedToDos es un array vacio y simplemente itera sobre ese array vacio. */
                 <TodoItem 
                     key={todo.text}
                     text={todo.text}

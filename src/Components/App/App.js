@@ -28,7 +28,12 @@ localStorage.removeItem("TODOS_V1"); */
 function App() {
   //Solo se pueden pasar estados de padres a hijos, por lo que se van a crear la mayoria de ellos en este componente padre.
 
-  const [toDos, saveToDosLS] = useLocalStorage("TODOS_V1", []);  //Se consume este custome hooks para crea la lista de ToDos de la app que toma como valor inicial el array que este guardado bajo TODOS_V1 en local storage
+  const {
+    items: toDos, 
+    saveItemsLS: saveToDosLS,
+    loading,
+    error
+  } = useLocalStorage("TODOS_V1", []);  //Se consume este custome hooks para crea la lista de ToDos de la app que toma como valor inicial el array que este guardado bajo TODOS_V1 en local storage. Tambien se trae los indicativos de carga y error para realizar acciones segun sus respuestas.
   const [searchValue, setSearchValue] = React.useState('');  //Se crea el estado searchValue para capturar lo que escriben los usuarios y ejecutar tareas con ello
 
   const completedToDos = toDos.filter(todo => todo.completed).length;  //se crea este estado derivado para llevar la cuenta de los ToDOs completados
@@ -90,6 +95,8 @@ function App() {
       searchedToDos={searchedToDos}
       toggleToDo={toggleToDo}
       deleteToDo={deleteToDo}
+      loading={loading}
+      error={error}
     />
   );
 }
