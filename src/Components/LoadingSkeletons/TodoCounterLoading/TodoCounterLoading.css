@@ -1,0 +1,29 @@
+.loading-todo-counter{
+    width: 22rem;
+    height: 5rem;
+    margin: 3rem auto;
+    border-radius: 0.5rem;
+    background: linear-gradient(90deg, rgba(250,250,250,0.9), rgba(200, 199, 199,0.9));
+    background-size: 400% 400%;
+    animation: loadingAnimation 3s ease-in-out infinite;
+}
+
+@media (min-width: 375px){
+    .loading-todo-counter{
+        width: 29rem;
+        height: 3rem;
+        margin-bottom: 2.5rem;
+    }
+}
+
+@keyframes loadingAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
