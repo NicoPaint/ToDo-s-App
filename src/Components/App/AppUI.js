@@ -1,6 +1,8 @@
 //Este componente maneja solo la parte visual del componenete App.
 //React
 import React from 'react';
+//Context
+import { TodoContext } from '../TodoContext/TodoContext';
 //Components
 import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton';
 import { TodoCounter } from '../TodoCounter/TodoCounter';
@@ -15,18 +17,19 @@ import { EmptyTodos } from '../EmptyTodos/EmptyTodos';
 //Styles
 import './App.css';
 
-function AppUI({
-    completedToDos,
-    totalToDos,
-    shootingConfetti,
-    searchValue,
-    setSearchValue,
-    searchedToDos,
-    toggleToDo,
-    deleteToDo,
-    loading,
-    error
-}){
+function AppUI(){
+    //Se trae del contexto de ToDos todos los elementos que se necesitan en este componente.
+    const {
+        completedToDos,
+        totalToDos,
+        shootingConfetti,
+        loading,
+        error,
+        searchedToDos,
+        toggleToDo,
+        deleteToDo
+    } = React.useContext(TodoContext);
+
     return(
         <div className='app'>
             {completedToDos === totalToDos && totalToDos !== 0 && shootingConfetti()}  {/* Cuando los completede sean igual a los totales, y existan ToDos, va a disparar el confetti en la app */}
@@ -34,22 +37,14 @@ function AppUI({
             {loading ? 
                 <TodoCounterLoading/> 
                 : 
-                <TodoCounter
-                    /* se pasa como props la cantidad de ToDOs terminados y la cantidad total para mostrarlos en el titulo de la app */
-                    total={totalToDos}
-                    completed={completedToDos}
-                />
+                <TodoCounter/>
             }
 
             {/* Se evalua si la app esta cargando para renderizar el loading skeleton */}
             {loading ? 
                 <TodoSearchLoading/>
                 :
-                <TodoSearch
-                    /* Se pasa el estado searchValue y su modificador a la barra de busqueda para capturar lo que escriben los usuarios */
-                    searchValue={searchValue}
-                    setSearchValue={setSearchValue}
-                />
+                <TodoSearch/>
             }
 
             <TodoList>

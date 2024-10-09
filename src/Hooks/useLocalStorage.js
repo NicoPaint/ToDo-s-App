@@ -52,3 +52,19 @@ function useLocalStorage(itemName, initialValue) {
 }
 
 export { useLocalStorage };
+
+/* const defaultToDos = [
+  { text: "Ver bettlejuice 2", completed: true},
+  { text: "Pagar arriendo", completed: false},
+  { text: "Comprar la moto", completed: false},
+  { text: "Invertir $400 dolares", completed: true},
+  { text: "Sacar la basura", completed: false},
+  { text: "Terminar la tarea", completed: true},
+  { text: "Agregar estilos CSS", completed: true},
+  { text: "Buscar los iconos", completed: false},
+  { text: "Descargar la imagen de fondo", completed: true},
+  { text: "Subir los cambios a GitHub", completed: true},
+]
+
+localStorage.setItem("TODOS_V1", JSON.stringify(defaultToDos));
+localStorage.removeItem("TODOS_V1"); */

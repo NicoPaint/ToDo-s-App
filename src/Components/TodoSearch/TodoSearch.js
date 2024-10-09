@@ -1,11 +1,17 @@
 //Este componente es la barra de búsqueda de la app para filtrar los ToDo items de la lista total
+//React
 import React from 'react';
+//Context
+import { TodoContext } from '../TodoContext/TodoContext';
+//Styles
 import './TodoSearch.css'
 
-function TodoSearch({
-    searchValue,
-    setSearchValue
-}){
+function TodoSearch(){
+    //Se trae del contexto de ToDo el estado searchValue y su actualizador
+    const {
+        searchValue,
+        setSearchValue
+    } = React.useContext(TodoContext);
 
     return(
         <input 
