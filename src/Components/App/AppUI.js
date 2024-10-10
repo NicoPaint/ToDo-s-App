@@ -14,6 +14,8 @@ import { TodoSearchLoading } from '../LoadingSkeletons/TodoSearchLoading/TodoSea
 import { TodosLoading } from '../LoadingSkeletons/TodosLoading/TodosLoading';
 import { TodoError } from '../TodoError/TodoError';
 import { EmptyTodos } from '../EmptyTodos/EmptyTodos';
+//Modal
+import { Modal } from '../Modals/Modal';
 //Styles
 import './App.css';
 
@@ -27,7 +29,8 @@ function AppUI(){
         error,
         searchedToDos,
         toggleToDo,
-        deleteToDo
+        deleteToDo,
+        openModal,
     } = React.useContext(TodoContext);
 
     return(
@@ -74,6 +77,13 @@ function AppUI(){
             </TodoList>
 
             <CreateTodoButton/>
+            
+            {/* Esta es la sección del modal para crear ToDos. Si openModal es true se va a mostrar la ventana emergente, si es false no se muestra */}
+            {openModal && (
+                <Modal>
+                Este es un texto de prueba de los portales
+                </Modal>
+            )}
         </div>
     )
 }

@@ -16,7 +16,9 @@ function TodoProvider({ children }){
         loading,
         error
       } = useLocalStorage("TODOS_V1", []);  //Se consume este custome hooks para crea la lista de ToDos de la app que toma como valor inicial el array que este guardado bajo TODOS_V1 en local storage. Tambien se trae los indicativos de carga y error para realizar acciones segun sus respuestas.
+
       const [searchValue, setSearchValue] = React.useState('');  //Se crea el estado searchValue para capturar lo que escriben los usuarios y ejecutar tareas con ello
+      const [openModal, setOpenModal] = React.useState(false);  //Se crea el estado openModal para controlar si se muestra o no el modal de crear ToDos en la app.
     
       const completedToDos = toDos.filter(todo => todo.completed).length;  //se crea este estado derivado para llevar la cuenta de los ToDOs completados
       const totalToDos = toDos.length;  //este estado derivado lleva la cuenta del total de ToDos creados.
@@ -78,7 +80,9 @@ function TodoProvider({ children }){
           toggleToDo,
           deleteToDo,
           loading,
-          error
+          error,
+          openModal, 
+          setOpenModal
         }}>
             {children}
         </TodoContext.Provider>
