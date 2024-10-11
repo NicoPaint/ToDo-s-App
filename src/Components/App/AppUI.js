@@ -16,6 +16,7 @@ import { TodoError } from '../TodoError/TodoError';
 import { EmptyTodos } from '../EmptyTodos/EmptyTodos';
 //Modal
 import { Modal } from '../Modals/Modal';
+import { CreateTodo } from "../Modals/CreateTodo/CreateTodo"
 //Styles
 import './App.css';
 
@@ -81,7 +82,7 @@ function AppUI(){
             {/* Esta es la sección del modal para crear ToDos. Si openModal es true se va a mostrar la ventana emergente, si es false no se muestra */}
             {openModal && (
                 <Modal>
-                    este es un texto de prueba
+                    <CreateTodo />
                 </Modal>
             )}
         </div>
