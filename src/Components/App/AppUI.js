@@ -14,7 +14,6 @@ import { TodoSearchLoading } from '../LoadingSkeletons/TodoSearchLoading/TodoSea
 import { TodosLoading } from '../LoadingSkeletons/TodosLoading/TodosLoading';
 import { TodoError } from '../TodoError/TodoError';
 import { EmptyTodos } from '../EmptyTodos/EmptyTodos';
-import { DeleteIcon } from '../Icons/DeleteIcon';
 //Modal
 import { Modal } from '../Modals/Modal';
 //Styles
@@ -32,7 +31,6 @@ function AppUI(){
         toggleToDo,
         deleteToDo,
         openModal,
-        setOpenModal
     } = React.useContext(TodoContext);
 
     return(
@@ -83,8 +81,7 @@ function AppUI(){
             {/* Esta es la sección del modal para crear ToDos. Si openModal es true se va a mostrar la ventana emergente, si es false no se muestra */}
             {openModal && (
                 <Modal>
-                    <DeleteIcon onDelete={() => setOpenModal(false)}/>
-                    
+                    este es un texto de prueba
                 </Modal>
             )}
         </div>
