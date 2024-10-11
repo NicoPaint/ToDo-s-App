@@ -31,6 +31,17 @@ function TodoProvider({ children }){
     
         return toDoText.includes(searchText); //va a regresar cada uno de los elementos del array que contenga el string que el usuario escriba en la barra. Si es un string vacío va a devolver todo el array original.
       })
+
+      //Esta funcion agrega un ToDo nuevo a la lista de ToDos. Solo recibe el texto que describe al ToDo.
+      const addTodo = (text) => {
+        const newToDos = [...toDos];  //se crea una copia de el estado toDos.
+        newToDos.push({
+          text,
+          completed: false
+        });  //Se agrega el nuevo ToDo al final de la lista.
+
+        saveToDosLS(newToDos);  //Se actualiza el estado de toDos y el LS para hacer el render del nuevo listado actualizado
+      }
     
       //Este estado derivado se usa para hacer la actualización de la lista cada vez que un usuario de click en el icono de completado, ya sea para marcarlo como completado o no. Para ello se le pasa el texto del item para identificarlo
       const toggleToDo = (text) => {
@@ -77,6 +88,7 @@ function TodoProvider({ children }){
           searchValue,
           setSearchValue,
           searchedToDos,
+          addTodo,
           toggleToDo,
           deleteToDo,
           loading,
