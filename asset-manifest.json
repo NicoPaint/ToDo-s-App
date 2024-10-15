@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/ToDos-App/static/css/main.6cb1d831.css",
-    "main.js": "/ToDos-App/static/js/main.279c3de1.js",
+    "main.css": "/ToDos-App/static/css/main.00491605.css",
+    "main.js": "/ToDos-App/static/js/main.b656cb90.js",
     "static/media/getting-to-success.png": "/ToDos-App/static/media/getting-to-success.7542f01df0bb735d5059.png",
     "index.html": "/ToDos-App/index.html",
     "static/media/task-done-svgrepo-com.svg": "/ToDos-App/static/media/task-done-svgrepo-com.c5c893ccc706bfda91e0c6510c6b0b7b.svg",
+    "static/media/arrow-down-svgrepo-com.svg": "/ToDos-App/static/media/arrow-down-svgrepo-com.7f9bda6079bf86ce9a77907f3e0d3d59.svg",
     "static/media/close-bold-svgrepo-com.svg": "/ToDos-App/static/media/close-bold-svgrepo-com.8ed61b92a290c0cb4ec40295506adb38.svg",
     "static/media/plus-svgrepo-com.svg": "/ToDos-App/static/media/plus-svgrepo-com.031aff2ea4a9dba1d61aff4ce2a81d68.svg",
-    "main.6cb1d831.css.map": "/ToDos-App/static/css/main.6cb1d831.css.map",
-    "main.279c3de1.js.map": "/ToDos-App/static/js/main.279c3de1.js.map"
+    "main.00491605.css.map": "/ToDos-App/static/css/main.00491605.css.map",
+    "main.b656cb90.js.map": "/ToDos-App/static/js/main.b656cb90.js.map"
   },
   "entrypoints": [
-    "static/css/main.6cb1d831.css",
-    "static/js/main.279c3de1.js"
+    "static/css/main.00491605.css",
+    "static/js/main.b656cb90.js"
   ]
 }
