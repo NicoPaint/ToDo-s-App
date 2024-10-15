@@ -22,6 +22,15 @@
     height: 100%;
 }
 
+.icon-container-arrow{
+    position: absolute;
+    right: -1.25rem;
+    bottom: 8rem;
+    width: 10rem;
+    height: 10rem;
+    animation: up-and-down 1.5s ease-in-out infinite alternate;
+}
+
 .icon-svg{
     width: 2.4rem;
     height: 2.4rem;
@@ -34,7 +43,12 @@
 }
 
 .icon-container-add .icon-svg path{
-    stroke: #082852;
+    stroke: var(--dark-blue);
+}
+
+.icon-container-arrow .icon-svg{
+    width: 10rem;
+    height: 10rem;
 }
 
 .icon-container-check:hover .icon-svg{
@@ -47,4 +61,13 @@
 
 .icon-container-add:hover .icon-svg{
     rotate: 180deg;
+}
+
+@keyframes up-and-down{
+    from{
+        transform: translateY(1.5rem);
+    }
+    to{
+        transform: translateY(-10rem);
+    }
 }

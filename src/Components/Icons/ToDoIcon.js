@@ -5,6 +5,7 @@ import React from "react";
 import {ReactComponent as CheckSVG} from "./SVG/task-done-svgrepo-com.svg"
 import {ReactComponent as DeleteSVG} from "./SVG/close-bold-svgrepo-com.svg"
 import {ReactComponent as AddSVG} from "./SVG/plus-svgrepo-com.svg"
+import {ReactComponent as ArroSVG} from "./SVG/arrow-down-svgrepo-com.svg"
 //styles
 import "./ToDoIcon.css"
 
@@ -14,6 +15,7 @@ const iconTypes = {
     "check": (color) => <CheckSVG className="icon-svg" fill={color}/>,
     "delete": (color) => <DeleteSVG className="icon-svg" fill={color}/>,
     "add": (color) => <AddSVG className="icon-svg" fill={color}/>,
+    "arrow": (color) => <ArroSVG className="icon-svg" fill={color}/>
 }
 
 function ToDoIcon({ type, color, onClick }){

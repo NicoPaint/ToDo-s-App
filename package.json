@@ -1,6 +1,6 @@
 {
-  "name": "platzi-intro-react-base",
-  "version": "0.1.0",
+  "name": "todos-manager",
+  "version": "1.0.0",
   "dependencies": {
     "react": "^18",
     "react-confetti": "^6.1.0",
@@ -35,5 +35,7 @@
   "homepage": "https://NicoPaint.github.io/ToDos-App",
   "devDependencies": {
     "gh-pages": "^6.2.0"
-  }
+  },
+  "author": "@NicolasFPinto",
+  "license": "MIT"
 }
